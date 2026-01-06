@@ -1,6 +1,12 @@
-import { canvas } from './main';
-import { renderSquare } from "./renderer";
-import { Vector, mapRange, calculateDistance, getNormalisedVector, getVector } from './utils';
+import { canvas } from "../main";
+import { renderSquare } from "../renderer";
+import {
+  Vector,
+  mapRange,
+  calculateDistance,
+  getNormalisedVector,
+  getVector,
+} from "../utils";
 
 export interface Water {
   position: Vector;
@@ -96,7 +102,7 @@ export const renderWater = (ctx: CanvasRenderingContext2D): void => {
     );
     ctx.translate(w.position.x, w.position.y);
     ctx.scale(scale, scale);
-    renderSquare(ctx, 10, w.radius, w.radius, 5);
+    renderSquare(ctx, 4, w.radius, w.radius, 5);
     ctx.restore();
   });
 };

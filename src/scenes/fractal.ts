@@ -1,6 +1,6 @@
-import { canvas } from './main';
-import { mapRange } from './utils';
-import { renderSquare } from './renderer';
+import { canvas } from "../main";
+import { mapRange } from "../utils";
+import { renderSquare } from "../renderer";
 
 export const renderFractal = (
   ctx: CanvasRenderingContext2D,
@@ -28,7 +28,10 @@ export const renderFractal = (
   renderBranch(0);
 };
 
-export const renderFractals = (ctx: CanvasRenderingContext2D, time: number): void => {
+export const renderFractals = (
+  ctx: CanvasRenderingContext2D,
+  time: number
+): void => {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.translate(canvas.width / 1.5, canvas.height / 2);
   ctx.rotate(-Math.PI / 2);
