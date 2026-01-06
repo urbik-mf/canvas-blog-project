@@ -1,7 +1,7 @@
 import { canvas } from "../main";
 import { renderSquare } from "../renderer";
 import { throttle, mapRange, calculateDistance, Vector } from "../utils";
-import { getTopBorder } from "./water";
+import { getTopBorder } from "./bugs";
 
 const GAP = 30;
 

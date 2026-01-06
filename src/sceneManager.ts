@@ -1,5 +1,5 @@
 import { canvas } from "./main";
-import { addWater } from "./scenes/water";
+import { addBug } from "./scenes/bugs";
 import { createGrid } from "./scenes/sun";
 import { addSquares, resetSquares } from "./scenes/square";
 import { reset } from "./update";
@@ -38,7 +38,7 @@ const scenes: SceneConfig[] = [
   {
     id: "treesAndWater",
     start: () => {
-      Array.from({ length: canvas.width / 3 }, addWater);
+      Array.from({ length: canvas.width / 3 }, addBug);
     },
     context: {
       renderFractals: true,
