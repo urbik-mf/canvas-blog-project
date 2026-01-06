@@ -1,6 +1,7 @@
-import { canvas } from './main';
-import { renderSquare } from "./renderer";
-import { throttle, mapRange, calculateDistance, Vector } from './utils';
+import { canvas } from "../main";
+import { renderSquare } from "../renderer";
+import { throttle, mapRange, calculateDistance, Vector } from "../utils";
+import { getTopBorder } from "./water";
 
 const GAP = 30;
 
@@ -26,7 +27,7 @@ export const createGrid = (): void => {
     }
   }
   shines.push({
-    position: { x: canvas.width / 2, y: 200 },
+    position: { x: canvas.width / 2, y: getTopBorder() },
     radius: 50,
     speed: 0,
   });
@@ -45,7 +46,7 @@ export const addPoint = (x: number, y: number): void => {
 
 export const addShine = throttle((): void => {
   shines.push({
-    position: { x: canvas.width / 2, y: 200 },
+    position: { x: canvas.width / 2, y: getTopBorder() },
     radius: 0,
     speed: Math.random() * 3 + 2,
   });

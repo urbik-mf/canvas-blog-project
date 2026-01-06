@@ -1,6 +1,7 @@
-import { canvas } from './main';
-import { renderSquare } from "./renderer";
-import { mapRange } from './utils';
+import { canvas } from "../main";
+import { renderSquare } from "../renderer";
+import { getCurrentScene } from "../sceneManager";
+import { mapRange } from "../utils";
 
 export interface Square {
   posX: number;
@@ -12,7 +13,15 @@ export interface Square {
 
 export const squares: Square[] = [];
 
-export const resetSquares = (): void => squares.splice(0, squares.length);
+export const resetSquares = () => squares.splice(0, squares.length);
+
+export const addSquares = (count = 1, lineCount = 2000) => {
+  for (let x = 0; x < count; x++) {
+    for (let y = 0; y < count; y++) {
+      addSquare(x / count, y / count, lineCount);
+    }
+  }
+};
 
 export const addSquare = (
   posX: number,

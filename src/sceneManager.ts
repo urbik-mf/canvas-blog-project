@@ -1,62 +1,77 @@
-import { canvas } from './main';
-import { water, addWater } from './water';
-import { grid, createGrid, shines } from './sun';
+import { canvas } from "./main";
+import { addWater } from "./scenes/water";
+import { createGrid } from "./scenes/sun";
+import { addSquares, resetSquares } from "./scenes/square";
+import { reset } from "./update";
 
 interface SceneConfig {
+  id: string;
   start?: () => void;
+  context?: Record<string, any>;
 }
 
-type Scene = (SceneConfig | string)[];
-
-const scenes: Scene[] = [
-  [
-    {
-      start: () => {
-        water.splice(0, water.length);
-        grid.splice(0, grid.length);
-        shines.splice(0, shines.length);
-      },
+const scenes: SceneConfig[] = [
+  {
+    id: "oneSquare",
+    start: () => {
+      reset();
+      addSquares(1, 2000);
     },
-    'one',
-  ],
-  ['grid'],
-  ['fractal'],
-  [
-    {
-      start: () => {
-        Array.from({ length: canvas.width / 3 }, addWater);
-      },
+  },
+  {
+    id: "gridSqaures",
+    start: () => {
+      resetSquares();
+      addSquares(3, 500);
     },
-    'fractal',
-    'water',
-  ],
-  [
-    {
-      start: () => {
-        createGrid();
-      },
+  },
+  {
+    id: "fractalTrees",
+    start: () => {
+      resetSquares();
     },
-    'fractal',
-    'water',
-    'sun',
-  ],
+    context: {
+      renderFractals: true,
+      renderBg: true,
+    },
+  },
+  {
+    id: "treesAndWater",
+    start: () => {
+      Array.from({ length: canvas.width / 3 }, addWater);
+    },
+    context: {
+      renderFractals: true,
+      renderBg: true,
+    },
+  },
+  {
+    id: "treesWaterAndSun",
+    start: () => {
+      createGrid();
+    },
+    context: {
+      renderFractals: true,
+      renderBg: true,
+    },
+  },
 ];
 let sceneIndex = 0;
 
-export const getCurrentScene = (): Scene => scenes[sceneIndex];
+export const getCurrentScene = (): SceneConfig => scenes[sceneIndex];
 
-document.querySelector('#toggle-mode')!.addEventListener('click', () => {
+document.querySelector("#toggle-mode")!.addEventListener("click", () => {
   sceneIndex++;
   if (sceneIndex > scenes.length - 1) sceneIndex = 0;
-  const firstItem = scenes[sceneIndex][0];
-  if (typeof firstItem === 'object' && firstItem.start) {
-    firstItem.start();
+  const scene = scenes[sceneIndex];
+  if (typeof scene === "object" && scene.start) {
+    scene.start();
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const firstItem = scenes[sceneIndex][0];
-  if (typeof firstItem === 'object' && firstItem.start) {
-    firstItem.start();
+document.addEventListener("DOMContentLoaded", () => {
+  const scene = scenes[sceneIndex];
+  if (typeof scene === "object" && scene.start) {
+    scene.start();
   }
 });
