@@ -102,7 +102,7 @@ export const renderWater = (ctx: CanvasRenderingContext2D): void => {
     );
     ctx.translate(w.position.x, w.position.y);
     ctx.scale(scale, scale);
-    renderSquare(ctx, 4, w.radius, w.radius, 5);
+    renderSquare(ctx, 4, w.radius, w.radius, 5, "#99f6");
     ctx.restore();
   });
 };
