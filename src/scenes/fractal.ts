@@ -35,7 +35,7 @@ export const renderFractals = (
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.translate(canvas.width / 1.5, canvas.height / 2);
   ctx.rotate(-Math.PI / 2);
-  ctx.scale(0.75, 0.75);
+  ctx.scale(1, 1);
   renderFractal(
     ctx,
     time,
@@ -46,6 +46,7 @@ export const renderFractals = (
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.translate(canvas.width / 5, canvas.height / 1.5);
   ctx.rotate(-Math.PI / 2);
+  ctx.scale(1.5, 1.5);
   renderFractal(
     ctx,
     time,

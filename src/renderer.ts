@@ -1,6 +1,6 @@
 import { canvas } from "./main";
 import { renderSquares } from "./scenes/square";
-import { getTopBorder, renderWater } from "./scenes/water";
+import { getTopBorder, renderBugs } from "./scenes/bugs";
 import { renderGrid } from "./scenes/sun";
 import { renderFractals } from "./scenes/fractal";
 import { getCurrentScene } from "./sceneManager";
@@ -22,7 +22,7 @@ export const render = (ctx: CanvasRenderingContext2D, time: number): void => {
   }
 
   renderGrid(ctx);
-  renderWater(ctx);
+  renderBugs(ctx);
   renderSquares(ctx, time, scene.id === "oneSquare");
 
   if (scene?.context?.renderFractals) {
@@ -33,6 +33,10 @@ export const render = (ctx: CanvasRenderingContext2D, time: number): void => {
 const renderBg = (ctx: CanvasRenderingContext2D) => {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.save();
+  ctx.globalAlpha = 0.1;
+  if (!settings.highPerformance) {
+    ctx.globalAlpha = 1;
+  }
   const grad = ctx.createRadialGradient(
     canvas.width / 2,
     canvas.height / 2,
@@ -53,7 +57,13 @@ const renderBg = (ctx: CanvasRenderingContext2D) => {
     getTopBorder(),
     canvas.width
   );
-  gradNight.addColorStop(0, "#ff33");
+  gradNight.addColorStop(0, "#ff35");
+  gradNight.addColorStop(0.15, "#ff35");
+  gradNight.addColorStop(0.15, "#ff34");
+  gradNight.addColorStop(0.25, "#ff34");
+  gradNight.addColorStop(0.25, "#ff33");
+  gradNight.addColorStop(0.35, "#ff33");
+  gradNight.addColorStop(0.35, "#ff32");
   gradNight.addColorStop(1, "#ff30");
   ctx.fillStyle = gradNight;
   ctx.fillRect(0, 0, canvas.width, canvas.height / 2);
@@ -71,12 +81,16 @@ const renderIntro = (ctx: CanvasRenderingContext2D): void => {
 };
 
 const renderBlackout = (ctx: CanvasRenderingContext2D): void => {
+  ctx.globalAlpha = 0.1;
+  if (!settings.highPerformance) {
+    ctx.globalAlpha = 1;
+  }
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.globalCompositeOperation = "source-over";
-  ctx.globalAlpha = 0.25;
   ctx.fillStyle = "black";
   ctx.rect(0, 0, canvas.width, canvas.height);
   ctx.fill();
+  ctx.globalAlpha = 1;
 };
 
 export const renderSquare = (

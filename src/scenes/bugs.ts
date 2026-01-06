@@ -8,7 +8,7 @@ import {
   getVector,
 } from "../utils";
 
-export interface Water {
+export interface Bug {
   position: Vector;
   velocity: Vector;
   drag: number;
@@ -16,12 +16,12 @@ export interface Water {
   radius: number;
 }
 
-export const water: Water[] = [];
+export const bugs: Bug[] = [];
 
 export const getTopBorder = (): number => canvas.height / 2;
 
-export const addWater = (): void => {
-  water.push({
+export const addBug = (): void => {
+  bugs.push({
     position: {
       x: canvas.width * Math.random(),
       y: getTopBorder() + (canvas.height - getTopBorder()) * Math.random(),
@@ -33,12 +33,12 @@ export const addWater = (): void => {
   });
 };
 
-export const updateWater = (time: number): void => {
+export const updateBugs = (time: number): void => {
   if (Math.abs(Math.sin(time)) > 0.9) {
-    addWater();
-    water.splice(0, 1);
+    addBug();
+    bugs.splice(0, 1);
   }
-  water.forEach((w) => {
+  bugs.forEach((w) => {
     const currentMass = mapRange(
       w.position.y,
       getTopBorder(),
@@ -47,7 +47,7 @@ export const updateWater = (time: number): void => {
       w.mass,
       true
     );
-    const otherWater = water.filter(
+    const otherWater = bugs.filter(
       (ow) =>
         ow !== w &&
         calculateDistance(ow.position, w.position) < currentMass + ow.mass
@@ -89,8 +89,8 @@ export const updateWater = (time: number): void => {
   });
 };
 
-export const renderWater = (ctx: CanvasRenderingContext2D): void => {
-  water.forEach((w) => {
+export const renderBugs = (ctx: CanvasRenderingContext2D): void => {
+  bugs.forEach((w) => {
     ctx.save();
     const scale = mapRange(
       w.position.y,
@@ -102,7 +102,7 @@ export const renderWater = (ctx: CanvasRenderingContext2D): void => {
     );
     ctx.translate(w.position.x, w.position.y);
     ctx.scale(scale, scale);
-    renderSquare(ctx, 4, w.radius, w.radius, 5, "#99f6");
+    renderSquare(ctx, 4, w.radius, w.radius, 5, "#3f3f");
     ctx.restore();
   });
 };
