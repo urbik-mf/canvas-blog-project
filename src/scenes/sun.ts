@@ -87,7 +87,7 @@ export const renderGrid = (ctx: CanvasRenderingContext2D): void => {
   grid.forEach((point) => {
     ctx.save();
     ctx.translate(point.position.x, point.position.y);
-    renderSquare(ctx, point.linesCount, point.side, point.side, 4);
+    renderSquare(ctx, point.linesCount, point.side, point.side, 4, "#ff36");
     ctx.restore();
   });
 };

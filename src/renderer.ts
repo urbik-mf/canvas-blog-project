@@ -4,6 +4,7 @@ import { getTopBorder, renderWater } from "./scenes/water";
 import { renderGrid } from "./scenes/sun";
 import { renderFractals } from "./scenes/fractal";
 import { getCurrentScene } from "./sceneManager";
+import { settings } from "./main";
 
 export const render = (ctx: CanvasRenderingContext2D, time: number): void => {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -83,8 +84,17 @@ export const renderSquare = (
   linesCount: number,
   width: number,
   height: number,
-  maxLineLength: number = 20
+  maxLineLength: number = 20,
+  lowPerformanceColor: string = "#fff6"
 ): void => {
+  if (!settings.highPerformance) {
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = "source-over";
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = lowPerformanceColor;
+    ctx.fillRect(-(width / 2), -(height / 2), width, height);
+    return;
+  }
   ctx.globalAlpha = 0.7;
   ctx.globalCompositeOperation = "lighten";
   ctx.shadowBlur = 0;

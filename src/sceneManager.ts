@@ -60,7 +60,7 @@ let sceneIndex = 0;
 
 export const getCurrentScene = (): SceneConfig => scenes[sceneIndex];
 
-document.querySelector("#toggle-mode")!.addEventListener("click", () => {
+document.querySelector("#next-scene")!.addEventListener("click", () => {
   sceneIndex++;
   if (sceneIndex > scenes.length - 1) sceneIndex = 0;
   const scene = scenes[sceneIndex];

@@ -2,6 +2,14 @@ import { render } from "./renderer";
 import { update } from "./update";
 import { debounce, throttle } from "./utils";
 
+export const settings = {
+  highPerformance: false,
+};
+
+document.querySelector("#toggle-mode")!.addEventListener("click", () => {
+  settings.highPerformance = !settings.highPerformance;
+});
+
 export const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
 
