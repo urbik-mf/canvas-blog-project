@@ -45,8 +45,11 @@ const renderBg = (ctx: CanvasRenderingContext2D) => {
     canvas.height / 2,
     canvas.width
   );
-  grad.addColorStop(1, "#2f24");
-  grad.addColorStop(0, "#2f21");
+  grad.addColorStop(0, "#22f4");
+  grad.addColorStop(0.2, "#66f4");
+  grad.addColorStop(0.25, "#6cf4");
+  grad.addColorStop(0.25, "#2f24");
+  grad.addColorStop(1, "#2f21");
   ctx.fillStyle = grad;
   ctx.fillRect(0, canvas.height / 2, canvas.width, canvas.height / 2);
   const gradNight = ctx.createRadialGradient(

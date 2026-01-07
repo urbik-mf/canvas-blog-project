@@ -1,6 +1,5 @@
 import { canvas } from "../main";
 import { renderSquare } from "../renderer";
-import { getCurrentScene } from "../sceneManager";
 import { mapRange } from "../utils";
 
 export interface Square {
