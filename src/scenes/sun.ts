@@ -28,7 +28,7 @@ export const createGrid = (): void => {
   }
   shines.push({
     position: { x: canvas.width / 2, y: getTopBorder() },
-    radius: 50,
+    radius: 25,
     speed: 0,
   });
 };
